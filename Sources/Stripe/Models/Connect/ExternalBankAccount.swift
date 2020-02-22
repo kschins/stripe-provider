@@ -15,6 +15,7 @@ public struct StripeExternalBankAccount: ExternalAccount, StripeModel {
     public var accountHolderName: String?
     public var accountHolderType: String?
     public var routingNumber: String?
+    public var bankName: String?
     
     public enum CodingKeys: String, CodingKey {
         case object
@@ -24,5 +25,6 @@ public struct StripeExternalBankAccount: ExternalAccount, StripeModel {
         case accountHolderName = "account_holder_name"
         case accountHolderType = "account_holder_type"
         case routingNumber = "routing_number"
+        case bankName = "bank_name"
     }
 }
