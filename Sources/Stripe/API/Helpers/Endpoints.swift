@@ -126,6 +126,10 @@ internal enum StripeAPIEndpoint {
     // MARK: - PERSONS
     case person(String)
     case persons(String, String)
+    
+    // MARK: - EXTERNAL ACCOUNTS
+    case externalAccounts(String)
+    case externalAccount(String, String)
 
     // MARK: - PAYMENT INTENTS
     case paymentIntents
@@ -224,6 +228,9 @@ internal enum StripeAPIEndpoint {
         
         case .person(let account): return APIBase + APIVersion + "accounts/\(account)/persons"
         case .persons(let account, let person): return APIBase + APIVersion + "accounts/\(account)/persons\(person)"
+
+        case .externalAccounts(let account): return APIBase + APIVersion + "accounts/\(account)/external_accounts";
+        case .externalAccount(let account, let externalAccount): return APIBase + APIVersion + "accounts/\(account)/external_accounts/\(externalAccount)"
 
         case .paymentIntents: return APIBase + APIVersion + "payment_intents"
         case .paymentIntent(let id): return APIBase + APIVersion + "payment_intents/\(id)"
