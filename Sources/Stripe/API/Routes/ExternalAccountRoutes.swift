@@ -27,20 +27,20 @@ public protocol ExternalAccountRoutes {
     ///   - verification: The person’s verification status.
     /// - Returns: Returns a person object.
     /// - Throws: A `StripeError`
-//    func create(account: String,
-//                address: [String: Any]?,
-//                dob: [String: Any]?,
-//                email: String?,
-//                firstName: String?,
-//                gender: StripePersonGender?,
-//                idNumber: String?,
-//                lastName: String?,
-//                maidenName: String?,
-//                metadata: [String: String]?,
-//                phone: String?,
-//                relationship: [String: Any]?,
-//                ssnLast4: String?,
-//                verification: [String: Any]?) throws -> EventLoopFuture<StripePerson>
+    func create(account: String,
+                address: [String: Any]?,
+                dob: [String: Any]?,
+                email: String?,
+                firstName: String?,
+                gender: StripePersonGender?,
+                idNumber: String?,
+                lastName: String?,
+                maidenName: String?,
+                metadata: [String: String]?,
+                phone: String?,
+                relationship: [String: Any]?,
+                ssnLast4: String?,
+                verification: [String: Any]?) throws -> EventLoopFuture<StripePerson>
     
     /// Retrieves an existing bank account.
     ///
@@ -71,21 +71,21 @@ public protocol ExternalAccountRoutes {
     ///   - verification: The person’s verification status.
     /// - Returns: Returns a person object.
     /// - Throws: A `StripeError`
-//    func update(account: String,
-//                person: String,
-//                address: [String: Any]?,
-//                dob: [String: Any]?,
-//                email: String?,
-//                firstName: String?,
-//                gender: StripePersonGender?,
-//                idNumber: String?,
-//                lastName: String?,
-//                maidenName: String?,
-//                metadata: [String: String]?,
-//                phone: String?,
-//                relationship: [String: Any]?,
-//                ssnLast4: String?,
-//                verification: [String: Any]?) throws -> EventLoopFuture<StripePerson>
+    func update(account: String,
+                person: String,
+                address: [String: Any]?,
+                dob: [String: Any]?,
+                email: String?,
+                firstName: String?,
+                gender: StripePersonGender?,
+                idNumber: String?,
+                lastName: String?,
+                maidenName: String?,
+                metadata: [String: String]?,
+                phone: String?,
+                relationship: [String: Any]?,
+                ssnLast4: String?,
+                verification: [String: Any]?) throws -> EventLoopFuture<StripePerson>
     
     /// Deletes an existing person’s relationship to the account’s legal entity.
     ///
@@ -94,7 +94,7 @@ public protocol ExternalAccountRoutes {
     ///   - person: The ID of a person to update.
     /// - Returns: Returns the deleted person object.
     /// - Throws: A `StripeError`
-//    func delete(account: String, person: String) throws -> EventLoopFuture<StripeDeletedObject>
+    func delete(account: String, person: String) throws -> EventLoopFuture<StripeDeletedObject>
     
     /// Returns a list of people associated with the account’s legal entity. The people are returned sorted by creation date, with the most recent people appearing first.
     ///
@@ -103,83 +103,83 @@ public protocol ExternalAccountRoutes {
     ///   - filter: A dictionary that will be used for the query parameters. [See More →](https://stripe.com/docs/api/persons/list?&lang=curl)
     /// - Returns: A `PersonsList`
     /// - Throws: A `StripeError`
-//    func listAll(account: String, filter: [String: Any]?) throws -> EventLoopFuture<PersonsList>
+    func listAll(account: String, filter: [String: Any]?) throws -> EventLoopFuture<PersonsList>
 }
 
 extension ExternalAccountRoutes {
-//    public func create(account: String,
-//                       address: [String: Any]? = nil,
-//                       dob: [String: Any]? = nil,
-//                       email: String? = nil,
-//                       firstName: String? = nil,
-//                       gender: StripePersonGender? = nil,
-//                       idNumber: String? = nil,
-//                       lastName: String? = nil,
-//                       maidenName: String? = nil,
-//                       metadata: [String: String]? = nil,
-//                       phone: String? = nil,
-//                       relationship: [String: Any]? = nil,
-//                       ssnLast4: String?,
-//                       verification: [String: Any]? = nil) throws -> EventLoopFuture<StripePerson> {
-//        return try create(account: account,
-//                          address: address,
-//                          dob: dob,
-//                          email: email,
-//                          firstName: firstName,
-//                          gender: gender,
-//                          idNumber: idNumber,
-//                          lastName: lastName,
-//                          maidenName: maidenName,
-//                          metadata: metadata,
-//                          phone: phone,
-//                          relationship: relationship,
-//                          ssnLast4: ssnLast4,
-//                          verification: verification)
-//    }
+    public func create(account: String,
+                       address: [String: Any]? = nil,
+                       dob: [String: Any]? = nil,
+                       email: String? = nil,
+                       firstName: String? = nil,
+                       gender: StripePersonGender? = nil,
+                       idNumber: String? = nil,
+                       lastName: String? = nil,
+                       maidenName: String? = nil,
+                       metadata: [String: String]? = nil,
+                       phone: String? = nil,
+                       relationship: [String: Any]? = nil,
+                       ssnLast4: String?,
+                       verification: [String: Any]? = nil) throws -> EventLoopFuture<StripePerson> {
+        return try create(account: account,
+                          address: address,
+                          dob: dob,
+                          email: email,
+                          firstName: firstName,
+                          gender: gender,
+                          idNumber: idNumber,
+                          lastName: lastName,
+                          maidenName: maidenName,
+                          metadata: metadata,
+                          phone: phone,
+                          relationship: relationship,
+                          ssnLast4: ssnLast4,
+                          verification: verification)
+    }
     
     public func retrieve(account: String, externalAccount: String) throws -> EventLoopFuture<StripeExternalBankAccount> {
         return try retrieve(account: account, externalAccount: externalAccount)
     }
     
-//    public func update(account: String,
-//                       person: String,
-//                       address: [String: Any]? = nil,
-//                       dob: [String: Any]? = nil,
-//                       email: String? = nil,
-//                       firstName: String? = nil,
-//                       gender: StripePersonGender? = nil,
-//                       idNumber: String? = nil,
-//                       lastName: String? = nil,
-//                       maidenName: String? = nil,
-//                       metadata: [String: String]? = nil,
-//                       phone: String? = nil,
-//                       relationship: [String: Any]? = nil,
-//                       ssnLast4: String? = nil,
-//                       verification: [String: Any]? = nil) throws -> EventLoopFuture<StripePerson> {
-//        return try update(account: account,
-//                          person: person,
-//                          address: address,
-//                          dob: dob,
-//                          email: email,
-//                          firstName: firstName,
-//                          gender: gender,
-//                          idNumber: idNumber,
-//                          lastName: lastName,
-//                          maidenName: maidenName,
-//                          metadata: metadata,
-//                          phone: phone,
-//                          relationship: relationship,
-//                          ssnLast4: ssnLast4,
-//                          verification: verification)
-//    }
-//
-//    func delete(account: String, person: String) throws -> EventLoopFuture<StripeDeletedObject> {
-//        return try delete(account: account, person: person)
-//    }
-//
-//    func listAll(account: String, filter: [String: Any]? = nil) throws -> EventLoopFuture<PersonsList> {
-//        return try listAll(account: account, filter: filter)
-//    }
+    public func update(account: String,
+                       person: String,
+                       address: [String: Any]? = nil,
+                       dob: [String: Any]? = nil,
+                       email: String? = nil,
+                       firstName: String? = nil,
+                       gender: StripePersonGender? = nil,
+                       idNumber: String? = nil,
+                       lastName: String? = nil,
+                       maidenName: String? = nil,
+                       metadata: [String: String]? = nil,
+                       phone: String? = nil,
+                       relationship: [String: Any]? = nil,
+                       ssnLast4: String? = nil,
+                       verification: [String: Any]? = nil) throws -> EventLoopFuture<StripePerson> {
+        return try update(account: account,
+                          person: person,
+                          address: address,
+                          dob: dob,
+                          email: email,
+                          firstName: firstName,
+                          gender: gender,
+                          idNumber: idNumber,
+                          lastName: lastName,
+                          maidenName: maidenName,
+                          metadata: metadata,
+                          phone: phone,
+                          relationship: relationship,
+                          ssnLast4: ssnLast4,
+                          verification: verification)
+    }
+
+    func delete(account: String, person: String) throws -> EventLoopFuture<StripeDeletedObject> {
+        return try delete(account: account, person: person)
+    }
+
+    func listAll(account: String, filter: [String: Any]? = nil) throws -> EventLoopFuture<PersonsList> {
+        return try listAll(account: account, filter: filter)
+    }
 }
 
 public struct StripeExternalAccountRoutes: ExternalAccountRoutes {
@@ -189,162 +189,162 @@ public struct StripeExternalAccountRoutes: ExternalAccountRoutes {
         self.request = request
     }
     
-//    public func create(account: String,
-//                       address: [String: Any]?,
-//                       dob: [String: Any]?,
-//                       email: String?,
-//                       firstName: String?,
-//                       gender: StripePersonGender?,
-//                       idNumber: String?,
-//                       lastName: String?,
-//                       maidenName: String?,
-//                       metadata: [String: String]?,
-//                       phone: String?,
-//                       relationship: [String: Any]?,
-//                       ssnLast4: String?,
-//                       verification: [String: Any]?) throws -> EventLoopFuture<StripePerson> {
-//        var body: [String: Any] = [:]
-//
-//        if let address = address {
-//            address.forEach { body["address[\($0)]"] = $1 }
-//        }
-//
-//        if let dob = dob {
-//            dob.forEach { body["dob[\($0)]"] = $1 }
-//        }
-//
-//        if let email = email {
-//            body["email"] = email
-//        }
-//
-//        if let firstName = firstName {
-//            body["first_name"] = firstName
-//        }
-//
-//        if let gender = gender {
-//            body["gender"] = gender.rawValue
-//        }
-//
-//        if let idNumber = idNumber {
-//            body["id_number"] = idNumber
-//        }
-//
-//        if let lastName = lastName {
-//            body["last_name"] = lastName
-//        }
-//
-//        if let maidenName = maidenName {
-//            body["maiden_name"] = maidenName
-//        }
-//
-//        if let metadata = metadata {
-//            metadata.forEach { body["metadata[\($0)]"] = $1 }
-//        }
-//
-//        if let phone = phone {
-//            body["phone"] = phone
-//        }
-//
-//        if let relationship = relationship {
-//            relationship.forEach { body["relationship[\($0)]"] = $1 }
-//        }
-//
-//        if let ssnLast4 = ssnLast4 {
-//            body["ssn_last_4"] = ssnLast4
-//        }
-//
-//        if let verification = verification {
-//            verification.forEach { body["verification[\($0)]"] = $1 }
-//        }
-//
-//        return try request.send(method: .POST, path: StripeAPIEndpoint.person(account).endpoint, body: body.queryParameters)
-//    }
+    public func create(account: String,
+                       address: [String: Any]?,
+                       dob: [String: Any]?,
+                       email: String?,
+                       firstName: String?,
+                       gender: StripePersonGender?,
+                       idNumber: String?,
+                       lastName: String?,
+                       maidenName: String?,
+                       metadata: [String: String]?,
+                       phone: String?,
+                       relationship: [String: Any]?,
+                       ssnLast4: String?,
+                       verification: [String: Any]?) throws -> EventLoopFuture<StripePerson> {
+        var body: [String: Any] = [:]
+
+        if let address = address {
+            address.forEach { body["address[\($0)]"] = $1 }
+        }
+
+        if let dob = dob {
+            dob.forEach { body["dob[\($0)]"] = $1 }
+        }
+
+        if let email = email {
+            body["email"] = email
+        }
+
+        if let firstName = firstName {
+            body["first_name"] = firstName
+        }
+
+        if let gender = gender {
+            body["gender"] = gender.rawValue
+        }
+
+        if let idNumber = idNumber {
+            body["id_number"] = idNumber
+        }
+
+        if let lastName = lastName {
+            body["last_name"] = lastName
+        }
+
+        if let maidenName = maidenName {
+            body["maiden_name"] = maidenName
+        }
+
+        if let metadata = metadata {
+            metadata.forEach { body["metadata[\($0)]"] = $1 }
+        }
+
+        if let phone = phone {
+            body["phone"] = phone
+        }
+
+        if let relationship = relationship {
+            relationship.forEach { body["relationship[\($0)]"] = $1 }
+        }
+
+        if let ssnLast4 = ssnLast4 {
+            body["ssn_last_4"] = ssnLast4
+        }
+
+        if let verification = verification {
+            verification.forEach { body["verification[\($0)]"] = $1 }
+        }
+
+        return try request.send(method: .POST, path: StripeAPIEndpoint.person(account).endpoint, body: body.queryParameters)
+    }
     
     public func retrieve(account: String, externalAccount: String) throws -> EventLoopFuture<StripeExternalBankAccount> {
         return try request.send(method: .GET, path: StripeAPIEndpoint.externalAccount(account, externalAccount).endpoint)
     }
     
-//    public func update(account: String,
-//                       person: String,
-//                       address: [String: Any]?,
-//                       dob: [String: Any]?,
-//                       email: String?,
-//                       firstName: String?,
-//                       gender: StripePersonGender?,
-//                       idNumber: String?,
-//                       lastName: String?,
-//                       maidenName: String?,
-//                       metadata: [String: String]?,
-//                       phone: String?,
-//                       relationship: [String: Any]?,
-//                       ssnLast4: String?,
-//                       verification: [String: Any]?) throws -> EventLoopFuture<StripePerson> {
-//        var body: [String: Any] = [:]
-//
-//        if let address = address {
-//            address.forEach { body["address[\($0)]"] = $1 }
-//        }
-//
-//        if let dob = dob {
-//            dob.forEach { body["dob[\($0)]"] = $1 }
-//        }
-//
-//        if let email = email {
-//            body["email"] = email
-//        }
-//
-//        if let firstName = firstName {
-//            body["first_name"] = firstName
-//        }
-//
-//        if let gender = gender {
-//            body["gender"] = gender.rawValue
-//        }
-//
-//        if let idNumber = idNumber {
-//            body["id_number"] = idNumber
-//        }
-//
-//        if let lastName = lastName {
-//            body["last_name"] = lastName
-//        }
-//
-//        if let maidenName = maidenName {
-//            body["maiden_name"] = maidenName
-//        }
-//
-//        if let metadata = metadata {
-//            metadata.forEach { body["metadata[\($0)]"] = $1 }
-//        }
-//
-//        if let phone = phone {
-//            body["phone"] = phone
-//        }
-//
-//        if let relationship = relationship {
-//            relationship.forEach { body["relationship[\($0)]"] = $1 }
-//        }
-//
-//        if let ssnLast4 = ssnLast4 {
-//            body["ssn_last_4"] = ssnLast4
-//        }
-//
-//        if let verification = verification {
-//            verification.forEach { body["verification[\($0)]"] = $1 }
-//        }
-//
-//        return try request.send(method: .POST, path: StripeAPIEndpoint.persons(account, person).endpoint, body: body.queryParameters)
-//    }
-//
-//    public func delete(account: String, person: String) throws -> EventLoopFuture<StripeDeletedObject> {
-//        return try request.send(method: .DELETE, path: StripeAPIEndpoint.persons(account, person).endpoint)
-//    }
-//
-//    public func listAll(account: String, filter: [String : Any]?) throws -> EventLoopFuture<PersonsList> {
-//        var queryParams = ""
-//        if let filter = filter {
-//            queryParams = filter.queryParameters
-//        }
-//        return try request.send(method: .GET, path: StripeAPIEndpoint.person(account).endpoint, query: queryParams)
-//    }
+    public func update(account: String,
+                       person: String,
+                       address: [String: Any]?,
+                       dob: [String: Any]?,
+                       email: String?,
+                       firstName: String?,
+                       gender: StripePersonGender?,
+                       idNumber: String?,
+                       lastName: String?,
+                       maidenName: String?,
+                       metadata: [String: String]?,
+                       phone: String?,
+                       relationship: [String: Any]?,
+                       ssnLast4: String?,
+                       verification: [String: Any]?) throws -> EventLoopFuture<StripePerson> {
+        var body: [String: Any] = [:]
+
+        if let address = address {
+            address.forEach { body["address[\($0)]"] = $1 }
+        }
+
+        if let dob = dob {
+            dob.forEach { body["dob[\($0)]"] = $1 }
+        }
+
+        if let email = email {
+            body["email"] = email
+        }
+
+        if let firstName = firstName {
+            body["first_name"] = firstName
+        }
+
+        if let gender = gender {
+            body["gender"] = gender.rawValue
+        }
+
+        if let idNumber = idNumber {
+            body["id_number"] = idNumber
+        }
+
+        if let lastName = lastName {
+            body["last_name"] = lastName
+        }
+
+        if let maidenName = maidenName {
+            body["maiden_name"] = maidenName
+        }
+
+        if let metadata = metadata {
+            metadata.forEach { body["metadata[\($0)]"] = $1 }
+        }
+
+        if let phone = phone {
+            body["phone"] = phone
+        }
+
+        if let relationship = relationship {
+            relationship.forEach { body["relationship[\($0)]"] = $1 }
+        }
+
+        if let ssnLast4 = ssnLast4 {
+            body["ssn_last_4"] = ssnLast4
+        }
+
+        if let verification = verification {
+            verification.forEach { body["verification[\($0)]"] = $1 }
+        }
+
+        return try request.send(method: .POST, path: StripeAPIEndpoint.persons(account, person).endpoint, body: body.queryParameters)
+    }
+
+    public func delete(account: String, person: String) throws -> EventLoopFuture<StripeDeletedObject> {
+        return try request.send(method: .DELETE, path: StripeAPIEndpoint.persons(account, person).endpoint)
+    }
+
+    public func listAll(account: String, filter: [String : Any]?) throws -> EventLoopFuture<PersonsList> {
+        var queryParams = ""
+        if let filter = filter {
+            queryParams = filter.queryParameters
+        }
+        return try request.send(method: .GET, path: StripeAPIEndpoint.person(account).endpoint, query: queryParams)
+    }
 }
