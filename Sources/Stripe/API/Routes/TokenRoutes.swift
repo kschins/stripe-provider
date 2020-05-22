@@ -10,7 +10,8 @@ import Vapor
 
 public protocol TokenRoutes {
     func createCard(card: [String: Any]?, customer: String?, connectAccount: String?) throws -> Future<StripeToken>
-    func createBankAccount(bankAcocunt: [String: Any]?, customer: String?, connectAccount: String?) throws -> Future<StripeToken>
+    func createBankAccount(bankAccount: [String: Any]?, customer: String?, connectAccount: String?) throws -> Future<StripeToken>
+    func createConnectAccount(account: [String: Any]?) throws -> Future<StripeToken>
     func createPII(personalId: String?) throws -> Future<StripeToken>
     func retrieve(token: String) throws -> Future<StripeToken>
 }
@@ -24,12 +25,16 @@ extension TokenRoutes {
                               connectAccount: connectAccount)
     }
     
-    public func createBankAccount(bankAcocunt: [String: Any]? = nil,
+    public func createBankAccount(bankAccount: [String: Any]? = nil,
                                   customer: String? = nil,
                                   connectAccount: String? = nil) throws -> Future<StripeToken> {
-        return try createBankAccount(bankAcocunt: bankAcocunt,
+        return try createBankAccount(bankAccount: bankAccount,
                                      customer: customer,
                                      connectAccount: connectAccount)
+    }
+    
+    public func createConnectAccount(account: [String: Any]?) throws -> Future<StripeToken> {
+        return try createConnectAccount(account: account)
     }
     
     public func createPII(personalId: String? = nil) throws -> Future<StripeToken> {
@@ -73,14 +78,14 @@ public struct StripeTokenRoutes: TokenRoutes {
     
     /// Create a bank account token
     /// [Learn More →](https://stripe.com/docs/api/curl#create_bank_account_token)
-    public func createBankAccount(bankAcocunt: [String: Any]?,
+    public func createBankAccount(bankAccount: [String: Any]?,
                                   customer: String?,
                                   connectAccount: String?) throws -> Future<StripeToken> {
         var body: [String: Any] = [:]
         var headers: HTTPHeaders = [:]
         
-        if let bankAcocunt = bankAcocunt {
-            bankAcocunt.forEach { body["bank_account[\($0)]"] = $1 }
+        if let bankAccount = bankAccount {
+            bankAccount.forEach { body["bank_account[\($0)]"] = $1 }
         }
         
         if let customer = customer {
@@ -92,6 +97,18 @@ public struct StripeTokenRoutes: TokenRoutes {
         }
         
         return try request.send(method: .POST, path: StripeAPIEndpoint.tokens.endpoint, body: body.queryParameters, headers: headers)
+    }
+    
+    /// Create a Connect account token
+    /// [Learn More →] (https://stripe.com/docs/api/tokens/create_account)
+    public func createConnectAccount(account: [String : Any]?) throws -> Future<StripeToken> {
+        var body: [String: Any] = [:]
+        
+        if let account = account {
+            account.forEach { body["account[\($0)]"] = $1 }
+        }
+        
+        return try request.send(method: .POST, path: StripeAPIEndpoint.tokens.endpoint, body: body.queryParameters)
     }
     
     /// Create a PII token
