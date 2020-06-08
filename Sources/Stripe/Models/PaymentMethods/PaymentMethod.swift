@@ -17,7 +17,7 @@ public struct StripePaymentMethod: StripeModel {
     public var created: Date?
     public var customer: String
     public var metadata: [String: String]?
-    public var card: StripeCard?
+    public var card: StripeBasicCard?
     public var billingDetails: StripeBillingDetails?
     public var livemode: Bool?
     
