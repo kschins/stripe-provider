@@ -15,7 +15,7 @@ public struct StripePaymentMethodCard: StripeModel {
     public var funding: FundingType
     public var last4: String
     //public var generatedFrom: [String: String]?
-    //public var threeDSecureUsage: [String: String]?
+    public var threeDSecureUsage: StripeThreeDUsage?
     public var wallet: StripeCardWallet?
     
     public enum CodingKeys: String, CodingKey {
@@ -28,7 +28,7 @@ public struct StripePaymentMethodCard: StripeModel {
         case funding
         case last4
         //case generatedFrom = "generated_from"
-        //case threeDSecureUsage = "three_d_secure_usage"
+        case threeDSecureUsage = "three_d_secure_usage"
         case wallet
     }
 }
@@ -37,4 +37,14 @@ public struct StripeCardChecks: StripeModel {
     public var addressLine1Check: CardValidationCheck?
     public var addressPostalCodeCheck: CardValidationCheck?
     public var cvcCheck: CardValidationCheck?
+    
+    public enum CodingKeys: String, CodingKey {
+        case addressLine1Check = "address_line1_check"
+        case addressPostalCodeCheck = "address_postal_code_check"
+        case cvcCheck = "cvc_check"
+    }
+}
+
+public struct StripeThreeDUsage: StripeModel {
+    public var supported: Bool
 }
