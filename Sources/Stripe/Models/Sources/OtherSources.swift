@@ -147,10 +147,6 @@ public struct StripeBasicCard: StripeModel {
     public var last4: String
     public var brand: String
     public var expYear: Int
-    public var checks: StripeCardChecks?
-    //public var generatedFrom: [String: String]?
-    //public var threeDSecureUsage: [String: String]
-    public var wallet: StripeCardWallet?
     
     public enum CodingKeys: String, CodingKey {
         case funding
@@ -161,8 +157,5 @@ public struct StripeBasicCard: StripeModel {
         case last4
         case brand
         case expYear = "exp_year"
-        //case generatedFrom = "generated_from"
-        //case threeDSecureUsage = "three_d_secure_usage"
-        case wallet
     }
 }
