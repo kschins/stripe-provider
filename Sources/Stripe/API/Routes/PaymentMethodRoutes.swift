@@ -50,7 +50,7 @@ public protocol PaymentMethodRoutes {
     /// - Parameters:
     ///     - customer: the ID of the customer whose PaymentMethods will be retrieved.
     ///     - type: A required filter on the list, aed on the object type field.
-    func listAll(customer: String, type: String) throws -> EventLoopFuture<PaymentMethodList>
+    func listAll(filter: [String: Any]?) throws -> EventLoopFuture<PaymentMethodList>
 }
 
 extension PaymentMethodRoutes {
@@ -76,8 +76,8 @@ extension PaymentMethodRoutes {
 //                          metadata: metadata)
 //    }
     
-    public func listAll(customer: String, type: String) throws -> EventLoopFuture<PaymentMethodList> {
-        return try listAll(customer: customer, type: type)
+    public func listAll(filter: [String: Any]?) throws -> EventLoopFuture<PaymentMethodList> {
+        return try listAll(filter: filter)
     }
     
 }
@@ -140,10 +140,13 @@ public struct StripePaymentMethodRoutes: PaymentMethodRoutes {
 //        return try request.send(method: .POST, path: StripeAPIEndpoint.externalAccounts(account).endpoint, body: body.queryParameters)
 //    }
     
-    public func listAll(customer: String, type: String) throws -> EventLoopFuture<PaymentMethodList> {
-        let body: [String: Any] = ["customer": customer,
-                                   "type": type]
+    public func listAll(filter: [String: Any]?) throws -> EventLoopFuture<PaymentMethodList> {
+        var queryParams = ""
         
-        return try request.send(method: .GET, path: StripeAPIEndpoint.paymentMethods.endpoint, body: body.queryParameters)
+        if let filter = filter {
+            queryParams = filter.queryParameters
+        }
+        
+        return try request.send(method: .GET, path: StripeAPIEndpoint.paymentMethods.endpoint, query: queryParams)
     }
 }
