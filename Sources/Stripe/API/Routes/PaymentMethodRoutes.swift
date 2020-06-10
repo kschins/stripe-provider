@@ -51,6 +51,9 @@ public protocol PaymentMethodRoutes {
     ///     - customer: the ID of the customer whose PaymentMethods will be retrieved.
     ///     - type: A required filter on the list, aed on the object type field.
     func listAll(filter: [String: Any]?) throws -> EventLoopFuture<PaymentMethodList>
+    
+    /// Detach a PaymentMethod object from a Customer
+    func detach(id: String) throws -> EventLoopFuture<StripePaymentMethod>
 }
 
 extension PaymentMethodRoutes {
@@ -80,6 +83,9 @@ extension PaymentMethodRoutes {
         return try listAll(filter: filter)
     }
     
+    public func detach(id: String) throws -> EventLoopFuture<StripePaymentMethod> {
+        return try detach(id: id)
+    }
 }
 
 public struct StripePaymentMethodRoutes: PaymentMethodRoutes {
@@ -149,4 +155,9 @@ public struct StripePaymentMethodRoutes: PaymentMethodRoutes {
         
         return try request.send(method: .GET, path: StripeAPIEndpoint.paymentMethods.endpoint, query: queryParams)
     }
+    
+    public func detach(id: String) throws -> EventLoopFuture<StripePaymentMethod> {
+        return try request.send(method: .POST, path: StripeAPIEndpoint.paymentMethodDetach(id).endpoint)
+    }
+
 }

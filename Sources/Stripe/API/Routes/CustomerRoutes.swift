@@ -9,7 +9,7 @@
 import Vapor
 
 public protocol CustomerRoutes {
-    func create(accountBalance: Int?, coupon: String?, description: String?, email: String?, invoicePrefix: String?, invoiceSettings: [String: Any]?, metadata: [String: String]?, shipping: [String: Any]?, source: Any?, taxInfo: [String: String]?) throws -> Future<StripeCustomer>
+    func create(accountBalance: Int?, coupon: String?, description: String?, name: String?, email: String?, invoicePrefix: String?, invoiceSettings: [String: Any]?, metadata: [String: String]?, shipping: [String: Any]?, source: Any?, taxInfo: [String: String]?) throws -> Future<StripeCustomer>
     func retrieve(customer: String) throws -> Future<StripeCustomer>
     func update(customer: String, accountBalance: Int?, businessVatId: String?, coupon: String?, defaultSource: String?, description: String?, email: String?, metadata: [String: String]?, shipping: ShippingLabel?, source: Any?) throws -> Future<StripeCustomer>
     func delete(customer: String) throws -> Future<StripeDeletedObject>
@@ -25,6 +25,7 @@ extension CustomerRoutes {
     public func create(accountBalance: Int? = nil,
                        coupon: String? = nil,
                        description: String? = nil,
+                       name: String? = nil,
                        email: String? = nil,
                        invoicePrefix: String? = nil,
                        invoiceSettings: [String: Any]? = nil,
@@ -35,6 +36,7 @@ extension CustomerRoutes {
         return try create(accountBalance: accountBalance,
                           coupon: coupon,
                           description: description,
+                          name: name,
                           email: email,
                           invoicePrefix: invoicePrefix,
                           invoiceSettings: invoiceSettings,
@@ -112,6 +114,7 @@ public struct StripeCustomerRoutes: CustomerRoutes {
     public func create(accountBalance: Int?,
                        coupon: String?,
                        description: String?,
+                       name: String?,
                        email: String?,
                        invoicePrefix: String?,
                        invoiceSettings: [String: Any]?,
@@ -131,6 +134,10 @@ public struct StripeCustomerRoutes: CustomerRoutes {
         
         if let description = description {
             body["description"] = description
+        }
+        
+        if let name = name {
+            body["name"] = name
         }
         
         if let email = email {
